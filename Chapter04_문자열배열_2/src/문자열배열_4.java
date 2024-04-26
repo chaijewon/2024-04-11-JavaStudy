@@ -329,7 +329,7 @@ public class 문자열배열_4 {
         }
         for(int i=1;i<result.length;i++)
         {
-        	if(result[i]>=49)
+        	if(result[i]==49)
         	System.out.println(i+"=>"+result[i]);
         }
 	}
