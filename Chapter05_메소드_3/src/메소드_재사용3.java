@@ -4,6 +4,6 @@
  */
 public class 메소드_재사용3 {
   public static void main(String[] args) {
-	메소드_구조적프로그램_1.process();
+	메소드_7.process();
   }
 }
