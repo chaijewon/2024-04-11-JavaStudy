@@ -82,8 +82,13 @@ public class 멤버변수_초기화 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         멤버변수_초기화 m=new 멤버변수_초기화();
+        /*
+         *   m 
+         *    => movies[1938] 
+         *    => m.movies
+         */
         Scanner scan=new Scanner(System.in);
-        System.out.println("===== 영화 목록 =====");
+        /*System.out.println("===== 영화 목록 =====");
         for(Movie movie:m.movies) // 클래스변수.
         {
         	System.out.println(movie.mno+"."+movie.title);
@@ -114,6 +119,22 @@ public class 멤버변수_초기화 {
         	}
         }
         System.out.println("출연한 영화 총 "+count+"건입니다");
+        
+        System.out.println("============== Top 10 =========");
+        for(int i=0;i<10;i++)
+        {
+        	System.out.println(m.movies[i].mno+"."+m.movies[i].title);
+        }*/
+        System.out.print("1~1938번 사이의 정수 입력:");
+        int no=scan.nextInt();
+        Movie mm=m.movies[no-1];
+        System.out.println("순위:"+mm.mno);
+        System.out.println("영화명:"+mm.title);
+        System.out.println("출연:"+mm.actor);
+        System.out.println("이미지:"+mm.poster);
+        System.out.println("장르:"+mm.genre);
+        System.out.println("등급:"+mm.grade);
+        System.out.println("감독:"+mm.director);
         
 	}
 
