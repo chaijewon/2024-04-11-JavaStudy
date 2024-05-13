@@ -1,5 +1,6 @@
 package com.sist.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 // 데이터형 선언 => 정보를 저장 1개에 정보 
@@ -14,6 +15,7 @@ import lombok.Data;
  *   프랭크 다라본트\n
  */
 @Data
+//lombok => getter/setter , 생성자와 관련된 
 public class Movie {
    private String rank;
    private String title;
@@ -26,5 +28,6 @@ public class Movie {
    // private => Movie클래스 영역에서만 사용이 가능 => 다른 클래스에서 연결이 안된다 => 데이터 손실이 없게 ...
    // 각변수에 기능을 부여 => 다른 클래스에서도 사용이 가능하게 만든다 (캡슐화) 
    // ---- 읽기/쓰기 => getter/setter
+   // public Movie(){}
    
 }

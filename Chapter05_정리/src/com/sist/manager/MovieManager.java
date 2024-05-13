@@ -39,9 +39,11 @@ public class MovieManager {
 		   FileReader fr=new FileReader("c:\\javaDev\\movie.txt");
 		   int i=0; // fr.read() => 리턴형 => int (문자의 번호를 읽어온다)
 		   StringBuffer sb=new StringBuffer(); // 읽어서 데이터를 누적 
+		   //String data="";
 		   while((i=fr.read())!=-1) // -1:파일끝 (EOF)
 		   {
 			   sb.append((char)i);
+			   //data+=(char)i;
 		   }
 		   // 반드시 파일 닫기
 		   fr.close();
@@ -117,11 +119,42 @@ public class MovieManager {
    {
 	   return (int)(Math.ceil(movies.length/20.0)); //ceil올림 
    }
+   // 상세보기 
+   public Movie movieDetailData(int mno)
+   {
+	   return movies[mno-1];
+   }
+   // 검색 
+   public Movie[] movieFindData(String title)
+   {
+	   int count=0;
+	   for(Movie m:movies)
+	   {
+		   if(m.getTitle().contains(title))
+		   {
+			   count++;
+		   }
+	   }
+	   // 선언 => 갯수 확인 => 갯수확인 => 데이터값 채우기 => 동일하면 선언 => 동일이 하지 않는 경우 
+	   Movie[] movie=new Movie[count];//동적 => 가변형 
+	   int i=0;
+	   for(Movie m:movies)
+	   {
+		   if(m.getTitle().contains(title))
+		   {
+			   movie[i]=m;
+			   i++;
+		   }
+	   }
+	   
+	   return movie;
+	   
+   }
    // 웹 => 목록(페이징) => 20~40 => 15 => 총페이지 
    public static void main(String[] args) {
 	   Scanner scan=new Scanner(System.in);
 	   MovieManager m=new MovieManager();
-	   int total=m.movieTotalPage();
+	   /*int total=m.movieTotalPage();
 	   // 인스턴스변수 / 인스턴스메소드 ==> 99:1
 	   System.out.print("1~"+total+"사이의 페이지 입력:");
 	   int page=scan.nextInt();
@@ -131,9 +164,50 @@ public class MovieManager {
 	   for(Movie mm:movie)
 	   {
 		   System.out.println(mm.getRank()+"."+mm.getTitle());
+	   }*/
+	   System.out.print("검색어 입력:");
+	   String title=scan.next();
+	   
+	   Movie[] movie=m.movieFindData(title);
+	   for(Movie mm:movie)
+	   {
+		   System.out.println(mm.getRank()+"."+mm.getTitle());
 	   }
 	   
+	   System.out.println("======================================");
+	   System.out.print("상세볼 영화번호:");
+	   int mno=scan.nextInt();
+	   
+	   Movie mmm=m.movieDetailData(mno);
+	   // 메소드 (요청에 처리 => 기능) 
+	   // 처리 기능 / 데이터만 있는 클래스(데이터형) 
+	   // 파일 / 오라클 => 데이터만 있는 클래스에 값을 채워서 전송 
+	   System.out.println("순위:"+mmm.getRank());
+	   System.out.println("영화명:"+mmm.getTitle());
+	   System.out.println("감독:"+mmm.getDirector());
+	   System.out.println("출연:"+mmm.getActor());
+	   System.out.println("장르:"+mmm.getGenre());
+	   System.out.println("등급:"+mmm.getGrade());
+	   System.out.println("개봉일:"+mmm.getRegdate());
+	   
+	   // => 목록 / 상세보기 / 검색 => 기본 
+	   
    }
+   /*
+    *   주력 
+    *   ----
+    *     데이터 모우기 : Movie => 멤버변수  
+    *     ---------
+    *     기능 설정 => 목록 / 상세 / 검색 / 예약 / 댓글 .... => 메소드 => 액션 클래스 
+    *               데이터 읽기 => 초기화(전체목록) => 생성자
+    *     ----------
+    *     다른 클래스에 활용 : 접근지정어 
+    *     ------------- private/protected/default => 사용할 수 없다 (접근이 안된다)
+    *                   public 
+    *                   --> 데이터 : 접근 금지 
+    *                       => 데이터 기능설정 메소드 
+    *                          getXxx() , setXxx() => getter/setter
+    */
 }
 
 
