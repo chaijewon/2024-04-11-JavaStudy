@@ -1,23 +1,24 @@
 package com.sist.client;
-import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-public class FindPanel extends JPanel{
-	JLabel titleLa=new JLabel("맛집 검색",JLabel.CENTER);
-    JButton b1;
-    JTextField tf;
+public class BoardListPanel extends JPanel{
+	JLabel titleLa=new JLabel("게시판",JLabel.CENTER);
+    JLabel pageLa=new JLabel("0 page / 0 pages");
+    JButton b1,b2,b3;
     JTable table;// table 모양
     DefaultTableModel model; // 데이터 관리 
     // 모양 => 필요한 클래스를 포함 => 있는 그대로 사용
     // 1. 초기화 , 화면 UI => 시작 동시에 처리 => 생성자 
     // => 파일 입출력 연습 
-    public FindPanel()
+    public BoardListPanel()
     {
-    	b1=new JButton("검색");
+    	b1=new JButton("새글");
+    	b2=new JButton("이전");
+    	b3=new JButton("다음");
     	/////////////////////////////////////////////////
-    	String[] col={"번호","","업체명","주소","전화"};
+    	String[] col={"번호","제목","이름","작성일","조회수"};
     	String[][] row=new String[0][5];
     	model=new DefaultTableModel(row,col);
     	table=new JTable(model);
@@ -30,13 +31,19 @@ public class FindPanel extends JPanel{
     	titleLa.setBounds(10, 15, 700, 40);
     	add(titleLa);//JFrame에 추가 
     	
+    	b1.setBounds(10, 60, 100, 30);
+    	add(b1);
     	
     	js.setBounds(10, 95, 760, 380);
     	add(js);
     	
-    	tf=new JTextField();
-    	tf.setBounds(10, 60, 200, 30);
-    	b1.setBounds(215, 60, 100, 30);
-    	add(tf);add(b1);
+    	JPanel p=new JPanel();
+    	p.add(b2);
+    	p.add(pageLa);
+    	p.add(b3);
+    	
+    	p.setBounds(10, 480, 700, 35);
+    	add(p);
+    	
     }
 }

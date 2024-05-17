@@ -31,6 +31,7 @@ public class ClientMain extends JFrame implements ActionListener{
     	mp.b1.addActionListener(this);// b1버튼을 클릭하면 => actionPerformed를 호출 
     	mp.b2.addActionListener(this);
     	mp.b6.addActionListener(this);
+    	mp.b4.addActionListener(this);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -55,6 +56,10 @@ public class ClientMain extends JFrame implements ActionListener{
 		{
 			JOptionPane.showMessageDialog(this, "프로그램을 종료합니다");
 			System.exit(0);
+		}
+		else if(mp.b4==e.getSource()) // 메뉴 2번 버튼 클릭 
+		{
+			cp.card.show(cp, "LIST");
 		}
 	}
 
