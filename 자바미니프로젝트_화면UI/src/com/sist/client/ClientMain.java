@@ -21,10 +21,10 @@ public class ClientMain extends JFrame implements ActionListener{
     	logo.setIcon(new ImageIcon(ImageChange.getImage(new ImageIcon("c:\\javaDev\\logo.jpg"),130, 30)));
     	//윈도우 크기
     	add(logo);
-    	setSize(800, 600);
+    	setSize(1030, 750);
     	setVisible(true);
     	// 윈도우 고정 
-    	setResizable(false);
+    	//setResizable(false);
     	// X버튼 클릭 메모리 회수 => 종료 
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	
@@ -32,6 +32,7 @@ public class ClientMain extends JFrame implements ActionListener{
     	mp.b2.addActionListener(this);
     	mp.b6.addActionListener(this);
     	mp.b4.addActionListener(this);
+    	mp.b3.addActionListener(this);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -60,6 +61,10 @@ public class ClientMain extends JFrame implements ActionListener{
 		else if(mp.b4==e.getSource()) // 메뉴 2번 버튼 클릭 
 		{
 			cp.card.show(cp, "LIST");
+		}
+		else if(mp.b3==e.getSource()) // 메뉴 2번 버튼 클릭 
+		{
+			cp.card.show(cp, "CHAT");
 		}
 	}
 

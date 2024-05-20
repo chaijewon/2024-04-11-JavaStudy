@@ -8,11 +8,13 @@ public class ControllerPanel extends JPanel{
    public HomePanel hp=new HomePanel();
    public FindPanel fp=new FindPanel();
    public BoardListPanel bp=new BoardListPanel();
+   public ChatPanel cp=new ChatPanel();
    public ControllerPanel()
    {
 	   setLayout(card);
 	   add("FIND",fp);
 	   add("HOME",hp);
 	   add("LIST",bp);
+	   add("CHAT",cp);
    }
 }
