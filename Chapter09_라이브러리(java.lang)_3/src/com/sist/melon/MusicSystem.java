@@ -1,8 +1,8 @@
-package com.sist.music;
+package com.sist.melon;
 import java.io.*;
 public class MusicSystem {
    // Music 데이터 공유 => 모든 유저가 같은 데이터를 사용하게 만든다 
-   private static Music[] musics=new Music[200];
+   private static Music[] musics=new Music[100];
    
    // 파일 읽기 => 데이터 저장 
    // 클래스 영역에서는 사용이 불가능 
@@ -45,7 +45,7 @@ public class MusicSystem {
 		   // CheckedException => 컴파일시에 예외 감시
 		   // => 초기화블록은 throws는 사용이 불가능하다 
 		   //             ------ 메소드에서만 사용이 가능 (생성자 포함)
-		   fr=new FileReader("c:\\javaDev\\genie.txt");
+		   fr=new FileReader("c:\\javaDev\\melon.txt");
 		   int i=0;
 		   StringBuffer sb=new StringBuffer();
 		   // 데이터 문자열 결합이 많은 경우 => StringBuffer / StringBulider 
@@ -74,7 +74,6 @@ public class MusicSystem {
 			   musics[i].setSinger(m[2]);
 			   musics[i].setAlbum(m[3]);
 			   musics[i].setPoster(m[4]);
-			   musics[i].setKey(m[5]);
 			   i++;
 		   }
 	   }catch(Exception ex)

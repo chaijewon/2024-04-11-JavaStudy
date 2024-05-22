@@ -1,4 +1,4 @@
-import com.sist.music.*;
+import com.sist.melon.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,14 +6,15 @@ import java.io.IOException;
 
 import javax.swing.table.*;
 
-public class 라이브러리_활용_3 extends JFrame implements ActionListener,MouseListener{
+public class 라이브러리_활용_4 extends JFrame implements ActionListener,MouseListener{
     JTextField tf;
     JButton b,b1;
     JTable table;
     DefaultTableModel model;
     TableColumn column;
     JComboBox<String> box;
-    public 라이브러리_활용_3()
+    MusicSystem ms=new MusicSystem();
+    public 라이브러리_활용_4()
     {
     	tf=new JTextField(20);
     	b=new JButton("검색");
@@ -75,7 +76,7 @@ public class 라이브러리_활용_3 extends JFrame implements ActionListener,M
     		model.removeRow(i);
     	}
     	
-    	MusicSystem ms=new MusicSystem();
+    	
     	Music[] music=ms.musicListData();
     	// String s=1
     	for(Music m:music)
@@ -90,7 +91,7 @@ public class 라이브러리_활용_3 extends JFrame implements ActionListener,M
     	{
     		model.removeRow(i);
     	}
-    	MusicSystem ms=new MusicSystem();
+    	
     	Music[] music=ms.musicFindData(type,fd);
     	
     	for(Music m:music)
@@ -105,7 +106,7 @@ public class 라이브러리_활용_3 extends JFrame implements ActionListener,M
 		{
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		}catch(Exception ex) {}
-        new 라이브러리_활용_3();
+        new 라이브러리_활용_4();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -137,21 +138,20 @@ public class 라이브러리_활용_3 extends JFrame implements ActionListener,M
 			{
 				int row=table.getSelectedRow();
 				String col=model.getValueAt(row, 0).toString();
-				MusicSystem ms=new MusicSystem();
 				Music music=ms.musicDetailData(Integer.parseInt(col));
 				String msg="노래명:"+music.getTitle()+"\n"
 						  +"가수명:"+music.getSinger()+"\n"
 						  +"앨범명:"+music.getAlbum();
 				JOptionPane.showMessageDialog(this, msg);
 				          
-				try 
+				/*try 
 				{
 					Runtime.getRuntime().exec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe "
 							+"http://youtube.com/embed/"+music.getKey());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}*/
 				
 			}
 		}
