@@ -110,6 +110,7 @@ public class BoardSystem {
    // 상세보기 
    public Board boardDetail(int no)
    {
+	   
 	   Board board=new Board();
 	   /*
 	    *  SELECT * FROM board
@@ -119,6 +120,24 @@ public class BoardSystem {
 	   {
 		   if(b.getNo()==no)
 		   {
+			   b.setHit(b.getHit()+1);// 조회수 증가 
+			   board=b;
+			   boardSave();
+			   break;
+		   }
+	   }
+	   return board;
+   }
+   public Board boardUpdateData(int no)
+   {
+	   
+	   Board board=new Board();
+	  
+	   for(Board b:list)
+	   {
+		   if(b.getNo()==no)
+		   {
+			   
 			   board=b;
 			   break;
 		   }
