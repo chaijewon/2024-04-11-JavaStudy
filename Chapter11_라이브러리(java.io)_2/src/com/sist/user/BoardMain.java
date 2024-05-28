@@ -28,8 +28,11 @@ public class BoardMain extends JFrame implements ActionListener{
     	
     	// 등록 => actionPerformed를 호출 
     	bList.inBtn.addActionListener(this);// 새글
+    	bList.prevBtn.addActionListener(this);
+    	bList.nextBtn.addActionListener(this);
     	bInsert.b2.addActionListener(this);// 취소
     	bInsert.b1.addActionListener(this);// 글쓰기
+    	
     }
     public void listPrint()
     {
@@ -42,7 +45,7 @@ public class BoardMain extends JFrame implements ActionListener{
     	ArrayList<Board> list=bs.boardList(curpage);
     	totalpage=bs.boardTotalPage();
     	bList.pageLa.setText(curpage+" page / "+totalpage+" pages");
-    	for(int i=list.size()-1;i>=0;i--) // 최신 => 가장 위로 올린다.
+    	for(int i=0;i<list.size();i++) // 최신 => 가장 위로 올린다.
     	{
     		Board b=list.get(i);
     		String[] data={
@@ -64,7 +67,28 @@ public class BoardMain extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if(bList.inBtn==e.getSource())// 새글 버튼 클릭
 		{
+			bInsert.nameTf.setText("");
+			bInsert.subTf.setText("");
+			bInsert.ta.setText("");
+			bInsert.pwdPf.setText("");
 			card.show(getContentPane(), "INSERT");
+			bInsert.nameTf.requestFocus();
+		}
+		else if(bList.prevBtn==e.getSource())
+		{
+			if(curpage>1)
+			{
+				curpage--;
+				listPrint();
+			}
+		}
+		else if(bList.nextBtn==e.getSource())
+		{
+		    if(curpage<totalpage)
+		    {
+		    	curpage++;
+		    	listPrint();
+		    }
 		}
 		else if(bInsert.b2==e.getSource())// 취소
 		{
@@ -109,9 +133,11 @@ public class BoardMain extends JFrame implements ActionListener{
 			b.setRegdate(new Date());
 			b.setHit(0);
 			bs.boardInsert(b);//추가 
+			
 			// 이동 
 			card.show(getContentPane(), "LIST");
 			listPrint();
+			
 		}
 	}
 

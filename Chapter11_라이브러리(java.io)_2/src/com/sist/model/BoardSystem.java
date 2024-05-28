@@ -17,18 +17,7 @@ public class BoardSystem {
    
    public BoardSystem()
    {
-	   Board b=new Board();
-	   b.setNo(1);
-	   b.setName("홍길동");
-	   b.setSubject("파일을 이용한 CRUD를 배우기");
-	   // 프로그램 => 데이터관리 (JSP,Spring,VueJS,ReactJS)
-	   // ===> 데이터분석 ===> 머신러닝 / 딥러닝 ====> 응용(AI) 
-	   b.setContent("파일을 이용한 CRUD=>데이터베이스(오라클):읽기,검색,추가,수정,삭제:메모리(컬렉션),파일,데이터베이스");
-	   b.setRegdate(new Date());
-	   b.setHit(0);
-	   b.setPwd("1234");
-	   list.add(b);
-	   boardSave();
+	  
 	   boardGetData();
    }
    
@@ -92,13 +81,21 @@ public class BoardSystem {
 	    *    2page => 10~19
 	    *    3page => 20~29 
 	    *    
-	    *    WHERE rownum BETWEEN 1 AND 10 
+	    *    WHERE rownum BETWEEN 1 AND 10 ORDER BY no DESC
 	    */
-	   for(int i=0;i<list.size();i++)
+	   ArrayList<Board> temp=
+			   new ArrayList<Board>();
+	   for(int i=list.size()-1;i>=0;i--)
 	   {
-		   Board b=list.get(i);
+		   temp.add(list.get(i));
+	   }
+	   // sort => 
+	   for(int i=0;i<temp.size();i++)
+	   {
+		   
 		   if(j<10 && i>=pagecnt)
 		   {
+			   Board b=temp.get(i);
 			   bList.add(b);
 			   j++;
 		   }
