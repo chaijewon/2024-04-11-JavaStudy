@@ -10,5 +10,9 @@ public class EmpVO {
    private int sal,mgr,comm,deptno;
    // 부서 정보 => JOIN
    private DeptVO dvo=new DeptVO(); // 포함 클래스를 만든다 
+   /*
+    *   private int deptno;
+        private String dname,loc;
+    */
    
 }

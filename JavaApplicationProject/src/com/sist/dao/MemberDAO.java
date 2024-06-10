@@ -50,7 +50,7 @@ public class MemberDAO {
     *   = 사번은 존재 , 이름도 동일 => 2 OK
     *   ------------------------ String / int 
     */
-   public String memberLogin(int empno,String ename)
+   public String memberLogin(String id,String pwd)
    {
 	   String result="";
 	   try
@@ -58,38 +58,41 @@ public class MemberDAO {
 		   // 1. 연결 
 		   getConnection();
 		   // 2. SQL문장 
-		   String sql="SELECT COUNT(*) FROM emp "
-				     +"WHERE empno="+empno; // 사번이 존재하는지 확인 => 0/1
+		   String sql="SELECT COUNT(*) FROM member "
+				     +"WHERE id=?"; // 사번이 존재하는지 확인 => 0/1
 		   // 3. 오라클로 SQL문장 전송 
 		   ps=conn.prepareStatement(sql);
+		   // ?에 값을 채운다 
+		   ps.setString(1, id);
 		   // 4. 결과값을 받는다 
 		   ResultSet rs=ps.executeQuery();
 		   rs.next();
 		   int count=rs.getInt(1); // 0,1
 		   rs.close();
-		   if(count==0) // 사번이 없는 경우 
+		   if(count==0) // ID가 없는 경우 
 		   {
-			   result="NOSABUN";
+			   result="NOID";
 		   }
-		   else // 사번이 있는 경우 
+		   else // ID가 있는 경우 
 		   {
-			   sql="SELECT ename FROM emp "
-				  +"WHERE empno="+empno;
+			   sql="SELECT pwd FROM member "
+				  +"WHERE id=?";
 			   // 오라클로 전송 
 			   ps=conn.prepareStatement(sql);
+			   ps.setString(1, id);
 			   // 결과값 받기 
 			   rs=ps.executeQuery();
 			   rs.next();
-			   String db_ename=rs.getString(1);
+			   String db_pwd=rs.getString(1);
 			   rs.close();
 			   
-			   if(db_ename.equals(ename))// 로그인 
+			   if(db_pwd.equals(pwd))// 로그인 
 			   {
 				   result="OK";
 			   }
 			   else // 이름이 없는 상태 
 			   {
-				   result="NONAME";
+				   result="NOPWD";
 			   }
 		   }
 	   }catch(Exception ex)

@@ -9,7 +9,6 @@ import com.sist.dao.*;
 public class ClientMain extends JFrame implements ActionListener{
     CardLayout card=new CardLayout();
     LoginPanel lp=new LoginPanel();
-    ControllPanel cp=new ControllPanel();
     MainPanel mp=new MainPanel();
     public ClientMain()
     {
@@ -25,6 +24,8 @@ public class ClientMain extends JFrame implements ActionListener{
     	lp.loginBtn.addActionListener(this);// 로그인 
     	lp.joinBtn.addActionListener(this);// 회원가입 
     	lp.cancelBtn.addActionListener(this);// 종료
+    	
+    	
     	
     }
 	public static void main(String[] args) {
@@ -49,37 +50,37 @@ public class ClientMain extends JFrame implements ActionListener{
 			try
 			{
 				// 유효성 검색 => 오라클 
-				String empno=lp.tf.getText();
-				if(empno.length()<1)
+				String id=lp.tf.getText();
+				if(id.length()<1)
 				{
-					JOptionPane.showMessageDialog(this, "사번을 입력하세요");
+					JOptionPane.showMessageDialog(this, "아이디를 입력하세요");
 					lp.tf.requestFocus();
 					return;
 				}
-				String name=String.valueOf(lp.pf.getPassword());
-				if(name.length()<1)
+				String pwd=String.valueOf(lp.pf.getPassword());
+				if(pwd.length()<1)
 				{
-					JOptionPane.showMessageDialog(this, "이름을 입력하세요");
+					JOptionPane.showMessageDialog(this, "비밀번호를 입력하세요");
 					lp.pf.requestFocus();
 					return;
 				}
 				
 				// 오라클 연결 
 				MemberDAO dao=MemberDAO.newInstance();
-				String result=dao.memberLogin(Integer.parseInt(empno), name);
+				String result=dao.memberLogin(id, pwd);
 				// 웹 => 자바스크립트로 처리 
-				if(result.equals("NOSABUN"))
+				if(result.equals("NOID"))
 				{
 					// 사번이 없는 경우 
-					JOptionPane.showMessageDialog(this, "사번이 존재하지 않습니다");
+					JOptionPane.showMessageDialog(this, "아이디가 존재하지 않습니다");
 					lp.tf.setText("");
 					lp.pf.setText("");
 					lp.tf.requestFocus();
 				}
-				else if(result.equals("NONAME"))
+				else if(result.equals("NOPWD"))
 				{
 					// 이름이 틀린 경우
-					JOptionPane.showMessageDialog(this, "이름이 틀립니다");
+					JOptionPane.showMessageDialog(this, "비밀번호가 틀립니다");
 					lp.pf.setText("");
 					lp.pf.requestFocus();
 				}
