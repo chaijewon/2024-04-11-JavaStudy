@@ -26,6 +26,7 @@ public class JoinPanel extends JPanel{
     	idtf=new JTextField();
     	idtf.setBounds(265, 80, 200, 30);
     	add(idtf);
+    	idtf.setEnabled(false);
     	
     	b1=new JButton("아이디 중복체크");
     	b1.setBounds(470, 80, 150, 30);
