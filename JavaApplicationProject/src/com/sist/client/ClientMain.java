@@ -10,22 +10,22 @@ public class ClientMain extends JFrame implements ActionListener{
     CardLayout card=new CardLayout();
     LoginPanel lp=new LoginPanel();
     MainPanel mp=new MainPanel();
+    JoinPanel jp=new JoinPanel();
     public ClientMain()
     {
     	setLayout(card);
     	add("LOGIN",lp);
     	add("MP",mp);
+    	add("JP",jp);
     	setSize(960, 700);
     	setResizable(false);
     	setVisible(true);
     	
     	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-    	
+    	//setDefaultCloseOperation(EXIT_ON_CLOSE);
     	lp.loginBtn.addActionListener(this);// 로그인 
     	lp.joinBtn.addActionListener(this);// 회원가입 
     	lp.cancelBtn.addActionListener(this);// 종료
-    	
-    	
     	
     }
 	public static void main(String[] args) {
@@ -43,6 +43,10 @@ public class ClientMain extends JFrame implements ActionListener{
 		{
 			dispose();// window메모리 해제 
 			System.exit(0);// 프로그램 종료
+		}
+		else if(e.getSource()==lp.joinBtn)
+		{
+			card.show(getContentPane(), "JP");
 		}
 		else if(e.getSource()==lp.loginBtn)
 		{
