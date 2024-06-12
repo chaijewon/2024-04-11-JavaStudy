@@ -44,7 +44,7 @@ public class JoinPanel extends JPanel{
     	nLa.setBounds(150, 150, 90, 30);
     	add(nLa);
     	
-    	nametf=new JPasswordField();
+    	nametf=new JTextField();
     	nametf.setBounds(265, 150, 200, 30);
     	add(nametf);
     	////////////////////////////////////////////////////////////////
