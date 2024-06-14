@@ -19,6 +19,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener{
     public ClientMain()
     {
     	setLayout(card);
+    	
     	add("LOGIN",lp);
     	add("MP",mp);
     	add("JP",jp);

@@ -7,8 +7,10 @@ public class MainPanel extends JPanel{
      //EmpListPanel ep=new EmpListPanel();
      public MainPanel()
      {
-    	 setLayout(new BorderLayout());
-    	 add("North",mp);
-    	 add("Center",cp);
+    	 setLayout(null);
+    	 mp.setBounds(100, 15, 800, 50);
+    	 add(mp);
+    	 cp.setBounds(10, 70, 830, 620);
+    	 add(cp);
      }
 }
