@@ -15,7 +15,16 @@ public class WaitRoom extends JPanel{
     	String[] col1={"방이름","상담사","상태","인원"};
     	String[][] row1=new String[0][4];
     	
-    	model1=new DefaultTableModel(row1,col1);// 데이터관리
+    	model1=new DefaultTableModel(row1,col1)
+    	{
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+    		
+    	};// 데이터관리
     	table1=new JTable(model1);//모양 ==> MV 
     	// Model => 데이터관리 (Model=>Java,JavaScript) => MVC / Vue / React 
     	// View => 윈도우 / HTML 
@@ -24,7 +33,16 @@ public class WaitRoom extends JPanel{
     	String[] col2={"ID","이름","성별","위치","구분"};
     	String[][] row2=new String[0][5];
     	
-    	model2=new DefaultTableModel(row2,col2);// 데이터관리
+    	model2=new DefaultTableModel(row2,col2)
+    	{
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+    		
+    	};// 데이터관리
     	table2=new JTable(model2);//모양 ==> MV 
     	// Model => 데이터관리 (Model=>Java,JavaScript) => MVC / Vue / React 
     	// View => 윈도우 / HTML 
