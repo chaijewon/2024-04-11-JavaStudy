@@ -107,7 +107,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			
 			try
 			{
-				out.write((Function.CHAT+"|"+msg+"|"+color).getBytes());
+				out.write((Function.CHAT+"|"+msg+"|"+color+"\n").getBytes());
 			}catch(Exception ex){}
 			
 			cp.chatP.tf.setText("");
