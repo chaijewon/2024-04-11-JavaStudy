@@ -47,7 +47,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	
     	mp.setBounds(300, 15, 600, 35);
     	add(mp);
-    	cp.setBounds(10, 60, 930, 500);
+    	cp.setBounds(10, 60, 930, 600);
     	add(cp);
     	
     	setSize(960, 700);
@@ -74,6 +74,12 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	idfrm.b1.addActionListener(this);// 아이디 체크
     	idfrm.b2.addActionListener(this);// 확인 
     	
+    	mp.exitBtn.addActionListener(this);
+    	mp.chatBtn.addActionListener(this);
+    	mp.homeBtn.addActionListener(this);
+    	
+    	cp.chatP.tf.addActionListener(this);
+    	
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -90,6 +96,18 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 		{
 			dispose();// window메모리 해제 
 			System.exit(0);// 프로그램 종료
+		}
+		else if(e.getSource()==mp.exitBtn)
+		{
+			System.exit(0);
+		}
+		else if(e.getSource()==mp.chatBtn)
+		{
+			
+		}
+		else if(e.getSource()==mp.homeBtn)
+		{
+			
 		}
 		else if(e.getSource()==jp.b1)// 아이디 중복 체크 
 		{
@@ -400,11 +418,26 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 				{
 				  case Function.LOGIN:
 				  {
-					
+					  String[] data= {
+						 st.nextToken(),
+						 st.nextToken(),
+						 st.nextToken()
+					  };
+					  cp.chatP.model.addRow(data);
+					  String admin=st.nextToken();
+					  
+					  if(!myId.equals(data[0]) && admin.equals("y"))
+					  {
+						  cp.chatP.box2.addItem(data[0]);
+					  }
+					  
 				  }
 				  break;
 				  case Function.MYLOG:
 				  {
+					  myId=st.nextToken();
+					  String name=st.nextToken();
+					  setTitle(name+"님의 채팅창");
 					  lp.setVisible(false);
 					  setVisible(true);
 				  }
