@@ -185,6 +185,34 @@ public class Server implements Runnable{
 								  +name+"]"+message);
 					  }
 					  break;
+					  /*
+					   *   클라이언트 : 요청 / 응답 출력  
+					   *            ---- <a> , <input type=button> , <form> 
+					   *            ---- html / css 
+					   *   --------------------
+					   *   서버 : 요청받기  => 자바 라이브러리 (HttpServletRequest)
+					   *         응답하기 => HttpServletResponse 
+					   *         ------------
+					   *         저장하기
+					   *         수정기능
+					   *         삭제기능 
+					   *         찾기기능 
+					   *         ------------ JDBC (오라클 연동) 
+					   *   --------------------- 
+					   */
+					  case Function.INFO:
+					  {
+						  String yid=st.nextToken();
+						  MemberVO vo=dao.memberInfo2(yid);
+						  messageTo(Function.INFO+"|"
+								   +vo.getName()+"|"
+								   +vo.getSex()+"|"
+								   +vo.getAddr1()+"|"
+								   +vo.getEmail()+"|"
+								   +vo.getPhone()+"|"
+								   +vo.getContent());
+					  }
+					  break;
 					  
 					}
 					

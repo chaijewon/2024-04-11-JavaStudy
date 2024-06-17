@@ -7,15 +7,38 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+
+import com.sist.commons.Function;
 import com.sist.dao.*;
 
-public class ClientMain extends JFrame implements ActionListener,MouseListener{
+// 네트워크 연결 
+import java.io.*;
+import java.net.*;
+import java.util.*;
+/*
+ *   => 서버에서 전송된 데이터 읽기 => 프로그램을 별도로 동작 => 쓰레드 
+ *   => 클라이언트 요청을 하는 프로그램 
+ */
+
+public class ClientMain extends JFrame implements ActionListener,MouseListener,Runnable{
     CardLayout card=new CardLayout();
     LoginPanel lp=new LoginPanel();
     MainPanel mp=new MainPanel();
     JoinPanel jp=new JoinPanel();
     PostFindFrame post=new PostFindFrame();// 우편번호 검색 
     IdCheckFrame idfrm=new IdCheckFrame();
+    // 네트워크에 필요한 객체
+    Socket s; // 통신기기 => 핸드폰 
+    OutputStream out; // 서버로 전송 
+    BufferedReader in; // 서버로부터 값을 받는다 
+    /*
+     *   1. 클라이언트 : 서버의 정보 (IP,PORT)
+     *      -- PORT는 자동 생성 => 유동이 가능 
+     *   2. 서버 : 클라이언트의 정보 
+     *      --- PORT/IP을 직접 결정 => 고정이여야 한다 
+     */
+    // 개인마다 필요한 변수 
+    String myId;
     public ClientMain()
     {
     	setLayout(card);
@@ -296,14 +319,24 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener{
 				}
 				else
 				{
-					// 로그인 
-					System.out.println("로그인 완료");
-					card.show(getContentPane(),"MP"); // 화면 변경 
+					// 로그인 ==> 서버로 전송 
+					try
+					{
+						//1. 소켓 => 전화 걸기 
+						s=new Socket("localhost",3355); // 조별 
+						out=s.getOutputStream();
+						in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+						out.write((Function.LOGIN+"|"+id+"\n").getBytes());
+						
+					}catch(Exception ex) {}
+					
+					// 서버로 들어오는 값을 받아서 출력 
+					new Thread(this).start(); // run을 호출 
 				}
 			}catch(Exception ex)
 			{
 				ex.printStackTrace();
-				JOptionPane.showMessageDialog(this, "사번은 정수여야 합니다..");
+				
 				return; // 메소드 종료 
 			}
 		}
@@ -343,6 +376,11 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener{
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void run() {
 		// TODO Auto-generated method stub
 		
 	}
