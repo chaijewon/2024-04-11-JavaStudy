@@ -110,7 +110,7 @@ public class ChatServer implements Runnable{
 						   messageAll(Function.LOGIN+"|"+id+"|"+name+"|"
 								    +sex+"|"+admin);
 						   // 2. 입장 메세지 전송 
-						   messageAll(Function.CHAT+"|[알림 ▶]"+name+"님 입장하셨습니다!!");
+						   messageAll(Function.CHAT+"|[알림 ▶]"+name+"님 입장하셨습니다!!|red");
 						   // 3. 현재 접속자에게 => 이전에 접속한 회원의 정보를 전송 
 						   
 						   // 저장 
@@ -129,7 +129,9 @@ public class ChatServer implements Runnable{
 					   break;
 					   case Function.CHAT:
 					   {
-						   
+						   String message=st.nextToken();
+						   String color=st.nextToken();
+						   messageAll(Function.CHAT+"|["+name+"]"+message+"|"+color);
 					   }
 					   break;
 					   case Function.INFO:

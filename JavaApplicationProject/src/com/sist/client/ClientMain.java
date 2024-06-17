@@ -97,6 +97,22 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			dispose();// window메모리 해제 
 			System.exit(0);// 프로그램 종료
 		}
+		else if(e.getSource()==cp.chatP.tf)
+		{
+			String msg=cp.chatP.tf.getText();
+			if(msg.length()<1)
+				return;
+			
+			String color=cp.chatP.box1.getSelectedItem().toString();
+			
+			try
+			{
+				out.write((Function.CHAT+"|"+msg+"|"+color).getBytes());
+			}catch(Exception ex){}
+			
+			cp.chatP.tf.setText("");
+			cp.chatP.tf.requestFocus();
+		}
 		else if(e.getSource()==mp.exitBtn)
 		{
 			System.exit(0);
@@ -441,6 +457,16 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					  lp.setVisible(false);
 					  setVisible(true);
 				  }
+				  break;
+				  case Function.CHAT:
+				  {
+					  String message=st.nextToken();
+					  String color=st.nextToken();
+					  cp.chatP.initStyle();
+					  
+					  cp.chatP.append(message, color);
+				  }
+				  break;
 				}
 			}
 		}catch(Exception ex) {ex.printStackTrace();}
