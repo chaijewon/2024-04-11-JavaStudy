@@ -140,8 +140,40 @@ public class Server implements Runnable{
 					  }
 					  break;
 					  // 나가기 요청
-					  case Function.EXIT:
+					  /*
+					   *    로그인 
+					   *    -----
+					   *      로그인 하는 사람 => MYLOG
+					   *      로그인된 사람 => LOGIN
+					   *    나가기 
+					   *    -----
+					   *      남아 있는 사람 => EXIT
+					   *      실제 나가는 사람 => MYEXIT
+					   *      
+					   *   Client / Server (웹)
+					   *     |       |
+					   *   Slave    Master 
+					   *   
+					   *   Server => Client에 지시를 내린다 
+					   *   Client => Server에서 지시를 받아서 동작 
+					   */
+					  case Function.EXIT: // exit.jsp 
 					  {
+						  messageAll(Function.EXIT+"|"+id);// 테이블에서 제거 
+						  messageAll(Function.CHAT+"|[☞ 알림]"+name+"님이 퇴장하셨습니다");
+						  // 남아 있는 사람 처리 
+						  
+						  // 실제 나가는 사람 처리 
+						  for(Client client:waitVc)
+						  {
+							  if(client.id.equals(id))
+							  {
+								  messageTo(Function.MYEXIT+"|"); // 윈도우창 종료 
+								  waitVc.remove(client);
+								  in.close();
+								  out.close();
+							  }
+						  }
 						  
 					  }
 					  break;
@@ -149,10 +181,11 @@ public class Server implements Runnable{
 					  case Function.CHAT:
 					  {
 						  String message=st.nextToken();
-						  messageTo(Function.CHAT+"|["
+						  messageAll(Function.CHAT+"|["
 								  +name+"]"+message);
 					  }
 					  break;
+					  
 					}
 					
 				}catch(Exception ex){}

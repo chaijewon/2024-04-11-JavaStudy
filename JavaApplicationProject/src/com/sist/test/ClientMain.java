@@ -29,6 +29,9 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
     	
     	login.b1.addActionListener(this);
     	login.b2.addActionListener(this);
+    	
+    	wr.tf.addActionListener(this);//enter
+    	wr.b6.addActionListener(this);//나가기 
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -44,7 +47,7 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 		}
 		else if(e.getSource()==login.b1)
 		{
-			/*String id=login.tf.getText();
+			String id=login.tf.getText();
 			if(id.length()<1)
 			{
 				login.tf.requestFocus();
@@ -72,7 +75,7 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 				login.pf.requestFocus();
 			}
 			else
-			{*/
+			{
 				// 서버와 연결 
 				try
 				{
@@ -81,14 +84,38 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 					out=s.getOutputStream();
 					//  서버와 연결 완료 
 					// 서버로 로그인 요청 
-					//out.write((Function.LOGIN+"|"+id+"\n").getBytes());
-					out.write((Function.LOGIN+"|hong\n").getBytes());
+					out.write((Function.LOGIN+"|"+id+"\n").getBytes());
+					//out.write((Function.LOGIN+"|hong\n").getBytes());
 				}catch(Exception ex) {}
 				// 서버로부터 응답값을 받아서 처리 
 				new Thread(this).start();
-			//}
+			}
+		}
+		else if(e.getSource()==wr.tf)// 대기실 채팅 
+		{
+			//1. 입력값 가지고 오기 
+			String msg=wr.tf.getText();
+			if(msg.length()<1)
+				return;
+			
+			// 2. 입력값 전송 
+			try
+			{
+				out.write((Function.CHAT+"|"+msg+"\n").getBytes()); // out 서버와 연결 
+			}catch(Exception ex){}
+			wr.tf.setText("");
+			wr.tf.requestFocus();
+		}
+		else if(e.getSource()==wr.b6)
+		{
+			try
+			{
+				out.write((Function.EXIT+"|\n").getBytes());
+			}catch(Exception ex){}
 		}
 	}
+	// client(요청) => server(응답) => client(응답 출력)
+	// 이벤트 발생 => 클릭 / 엔터 ... 
 	// 서버의 응답값을 처리 
 	@Override
 	public void run() {
@@ -126,8 +153,29 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 				   case Function.CHAT:
 				   {
 					   wr.ta.append(st.nextToken()+"\n");
+					   wr.bar.setValue(wr.bar.getMaximum());
+				   }
+				   case Function.EXIT:
+				   {
+					   String mid=st.nextToken();
+					   for(int i=0;i<wr.model2.getRowCount();i++)
+					   {
+						   String ids=wr.model2.getValueAt(i, 0).toString();
+						   if(mid.equals(ids))
+						   {
+							   wr.model2.removeRow(i);
+							   break;
+						   }
+					   }
 					   
 				   }
+				   break;
+				   case Function.MYEXIT:
+				   {
+					   dispose();
+					   System.exit(0);
+				   }
+				   break;
 				}
 			}catch(Exception ex) {}
 		}

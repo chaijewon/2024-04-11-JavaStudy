@@ -5,6 +5,7 @@ public class MemberDAO {
    private Connection conn;
    private PreparedStatement ps;
    private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
+   // localhost => 192.168.10.124
    private static MemberDAO dao; // 싱글턴 
    
    // 1. 드라이버 등록 
@@ -20,7 +21,7 @@ public class MemberDAO {
    {
 	   try
 	   {
-		   conn=DriverManager.getConnection(URL,"hr","happy");
+		   conn=DriverManager.getConnection(URL,"hr","happy");// hr2
 		   // conn hr/happy
 	   }catch(Exception ex) {}
    }
