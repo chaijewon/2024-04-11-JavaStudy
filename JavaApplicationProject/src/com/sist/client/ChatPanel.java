@@ -20,6 +20,7 @@ public class ChatPanel extends JPanel{
     	JScrollPane js1=new JScrollPane(pane);
     	js1.setBounds(10, 15, 480, 480);
     	add(js1);
+    	pane.setEditable(false);
     	
     	tf=new JTextField();
     	tf.setBounds(10, 500, 380, 30);

@@ -115,15 +115,18 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 		}
 		else if(e.getSource()==mp.exitBtn)
 		{
-			System.exit(0);
+			try
+			{
+				out.write((Function.EXIT+"|\n").getBytes());
+			}catch(Exception ex){}
 		}
 		else if(e.getSource()==mp.chatBtn)
 		{
-			
+			cp.card.show(cp, "CHAT");
 		}
 		else if(e.getSource()==mp.homeBtn)
 		{
-			
+			cp.card.show(cp, "HP");
 		}
 		else if(e.getSource()==jp.b1)// 아이디 중복 체크 
 		{
@@ -465,6 +468,36 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					  cp.chatP.initStyle();
 					  
 					  cp.chatP.append(message, color);
+				  }
+				  break;
+				  case Function.MYEXIT:
+				  {
+					  System.exit(0);
+				  }
+				  break;
+				  case Function.EXIT:
+				  {
+					  String yid=st.nextToken();
+					  for(int i=0;i<cp.chatP.model.getRowCount();i++)
+					  {
+						  String s=cp.chatP.model.getValueAt(i, 0).toString();
+						  // 테이블에 등록된 ID읽기 
+						  if(s.equals(yid))
+						  {
+							  cp.chatP.model.removeRow(i);
+							  break;
+						  }
+					  }
+					  for(int i=0;i<cp.chatP.box2.getItemCount();i++)
+					  {
+						  String s=cp.chatP.box2.getItemAt(i);
+						  if(s.equals(yid))
+						  {
+							  cp.chatP.box2.removeItemAt(i);
+							  break;
+						  }
+					  }
+					  
 				  }
 				  break;
 				}

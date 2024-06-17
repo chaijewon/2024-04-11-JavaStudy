@@ -1,5 +1,8 @@
 package com.sist.server;
 import java.util.*;
+
+import javax.crypto.Cipher;
+
 import java.io.*;
 import java.lang.module.FindException;
 import java.net.*;
@@ -141,7 +144,26 @@ public class ChatServer implements Runnable{
 					   break;
 					   case Function.EXIT:
 					   {
-						   
+						   messageAll(Function.EXIT+"|"+id);
+						   messageAll(Function.CHAT+"|[알림 ▶]"+name+"님 퇴장하셨습니다!!|red");
+						   // 남아 있는 회원 처리 
+						   // 실제 나가는 회원 처리 
+						   for(Client client:waitVc)
+						   {
+						    // => Voctor에서 제거 
+						     if(client.id.equals(id))
+						     {
+						    	waitVc.remove(client);
+						    	messageTo(Function.MYEXIT+"|");
+						    	
+						    	in.close();
+						    	out.close();
+						    	
+						    	break;
+						     }
+						    // => 나가라는 메세지 전송 
+						    // => in/out종료
+						   }
 					   }
 					}
 				}
