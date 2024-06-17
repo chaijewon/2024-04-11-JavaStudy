@@ -23,10 +23,12 @@ import java.util.*;
 public class ClientMain extends JFrame implements ActionListener,MouseListener,Runnable{
     CardLayout card=new CardLayout();
     LoginPanel lp=new LoginPanel();
-    MainPanel mp=new MainPanel();
     JoinPanel jp=new JoinPanel();
     PostFindFrame post=new PostFindFrame();// 우편번호 검색 
     IdCheckFrame idfrm=new IdCheckFrame();
+    
+    ControllPanel cp=new ControllPanel();
+    MenuPanel mp=new MenuPanel();
     // 네트워크에 필요한 객체
     Socket s; // 통신기기 => 핸드폰 
     OutputStream out; // 서버로 전송 
@@ -41,14 +43,16 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     String myId;
     public ClientMain()
     {
-    	setLayout(card);
+    	setLayout(null);
     	
-    	add("LOGIN",lp);
-    	add("MP",mp);
-    	add("JP",jp);
+    	mp.setBounds(300, 15, 600, 35);
+    	add(mp);
+    	cp.setBounds(10, 60, 930, 500);
+    	add(cp);
+    	
     	setSize(960, 700);
     	setResizable(false);
-    	setVisible(true);
+    	//setVisible(true);
     	
     	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     	//setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -271,11 +275,13 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 		}
 		else if(e.getSource()==jp.b4)
 		{
-			card.show(getContentPane(), "LOGIN");
+			jp.setVisible(false);
+			lp.setVisible(true);
 		}
 		else if(e.getSource()==lp.joinBtn)
 		{
-			card.show(getContentPane(), "JP");
+			jp.setVisible(true);
+			lp.setVisible(false);
 		}
 		else if(e.getSource()==lp.loginBtn)
 		{
@@ -325,10 +331,11 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 						//1. 소켓 => 전화 걸기 
 						s=new Socket("localhost",3355); // 조별 
 						out=s.getOutputStream();
+						System.out.println("id="+id);
 						in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 						out.write((Function.LOGIN+"|"+id+"\n").getBytes());
 						
-					}catch(Exception ex) {}
+					}catch(Exception ex) {ex.printStackTrace();}
 					
 					// 서버로 들어오는 값을 받아서 출력 
 					new Thread(this).start(); // run을 호출 
@@ -337,7 +344,6 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			{
 				ex.printStackTrace();
 				
-				return; // 메소드 종료 
 			}
 		}
 	}
@@ -382,7 +388,29 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		try
+		{
+			while(true)
+			{
+				String msg=in.readLine(); // 서버 응답값 
+				System.out.println("Server =>"+msg);
+				StringTokenizer st=new StringTokenizer(msg,"|");
+				int delimit=Integer.parseInt(st.nextToken());
+				switch(delimit)
+				{
+				  case Function.LOGIN:
+				  {
+					
+				  }
+				  break;
+				  case Function.MYLOG:
+				  {
+					  lp.setVisible(false);
+					  setVisible(true);
+				  }
+				}
+			}
+		}catch(Exception ex) {ex.printStackTrace();}
 	}
 
 }

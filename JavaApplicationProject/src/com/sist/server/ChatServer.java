@@ -35,12 +35,19 @@ public class ChatServer implements Runnable{
 	{
 		try
 		{
-			Socket s=ss.accept(); // Socket은 클라이언트의 정보 => ip,port
+			while(true)
+			{
+			  Socket s=ss.accept(); // Socket은 클라이언트의 정보 => ip,port
+			  System.out.println("client 접속");
+			  Client client=new Client(s);// 정보 => 
+			  client.start(); // 정보에 해당되는 클라이언트와 통신을 해라..
+			}
 		}catch(Exception ex){}
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+        ChatServer server=new ChatServer();
+        new Thread(server).start();
 	}
 	// 통신 담당 => 클라이언트 1개당 한개씩 연결 => 동시에 프로그램이 작동 => 프로그램안에서 여러개의 프로그램을 동시 작업 => 쓰레드 
 	// 같은 작업을 한다 => 통신 => 모든 클라이언트가 다르게 동작이 가능하다 => 웹 / 모바일 (웹 서버) 
@@ -69,6 +76,7 @@ public class ChatServer implements Runnable{
 				this.s=s;
 				in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 				out=s.getOutputStream();
+				System.out.println("생성자 Call..");
 			}catch(Exception ex){}
 		}
 		
@@ -80,6 +88,7 @@ public class ChatServer implements Runnable{
 				while(true)
 				{
 					String msg=in.readLine();// 요청값을 받는다 
+					System.out.println("Client => "+msg);
 					// 구분 => 요청? => Function
 					// 구분자 전송 => Function.LOGIN => 문자열 => 보안 
 					StringTokenizer st=new StringTokenizer(msg,"|");
@@ -91,17 +100,21 @@ public class ChatServer implements Runnable{
 					   {
 						   // id => 데이터베이스 (정보읽기)
 						   id=st.nextToken();
+						   System.out.println("id="+id);
 						   MemberVO vo=dao.memberInfo(id);
 						   name=vo.getName();
 						   sex=vo.getSex();
 						   admin=vo.getAdmin();
-						   
+						   System.out.println("name="+name);
 						   // 1. 접속된 모든 회원에게 정보 전송 
 						   messageAll(Function.LOGIN+"|"+id+"|"+name+"|"
 								    +sex+"|"+admin);
 						   // 2. 입장 메세지 전송 
 						   messageAll(Function.CHAT+"|[알림 ▶]"+name+"님 입장하셨습니다!!");
 						   // 3. 현재 접속자에게 => 이전에 접속한 회원의 정보를 전송 
+						   
+						   // 저장 
+						   waitVc.add(this);
 						   
 						   // Login=>Home으로 변경 (창) 
 						   messageTo(Function.MYLOG+"|"+id+"|"+name);
