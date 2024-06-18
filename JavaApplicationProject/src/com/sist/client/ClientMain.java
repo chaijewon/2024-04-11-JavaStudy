@@ -47,10 +47,10 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	
     	mp.setBounds(300, 15, 600, 35);
     	add(mp);
-    	cp.setBounds(10, 60, 930, 600);
+    	cp.setBounds(10, 60, 930, 580);
     	add(cp);
     	
-    	setSize(960, 700);
+    	setSize(960, 680);
     	setResizable(false);
     	//setVisible(true);
     	
@@ -226,7 +226,8 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			if(res.equals("yes"))
 			{
 				JOptionPane.showMessageDialog(this, "회원 가입에 축하합니다");
-				card.show(getContentPane(), "LOGIN");
+				lp.setVisible(true);
+				jp.setVisible(false);
 			}
 			else
 			{
@@ -362,6 +363,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 				}
 				else
 				{
+					
 					// 로그인 ==> 서버로 전송 
 					try
 					{

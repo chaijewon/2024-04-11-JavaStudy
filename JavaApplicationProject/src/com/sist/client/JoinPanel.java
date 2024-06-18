@@ -19,7 +19,7 @@ public class JoinPanel extends JFrame{
     	tLa.setBounds(10, 15, 930, 40);
     	add(tLa);
     	
-    	iLa=new JLabel("아이디",JLabel.RIGHT);
+    	iLa=new JLabel("<html><font color=red>※</font>아이디</html>",JLabel.RIGHT);
     	iLa.setBounds(150, 80, 90, 30);
     	add(iLa);
     	
@@ -32,7 +32,7 @@ public class JoinPanel extends JFrame{
     	b1.setBounds(470, 80, 150, 30);
     	add(b1);
     	/////////////////////////////////////////////////////////////// id
-    	pLa1=new JLabel("비밀번호",JLabel.RIGHT);
+    	pLa1=new JLabel("<html><font color=red>※</font>비밀번호</html>",JLabel.RIGHT);
     	pLa1.setBounds(150, 115, 90, 30);
     	add(pLa1);
     	
@@ -40,7 +40,7 @@ public class JoinPanel extends JFrame{
     	pf.setBounds(265, 115, 200, 30);
     	add(pf);
     	///////////////////////////////////////////////////////////////
-    	nLa=new JLabel("이름",JLabel.RIGHT);
+    	nLa=new JLabel("<html><font color=red>※</font>이름</html>",JLabel.RIGHT);
     	nLa.setBounds(150, 150, 90, 30);
     	add(nLa);
     	
@@ -65,7 +65,7 @@ public class JoinPanel extends JFrame{
     	
     	rb1.setSelected(true);
     	/////////////////////////////////////////////////////////////
-    	bLa=new JLabel("생년월일",JLabel.RIGHT);
+    	bLa=new JLabel("<html><font color=red>※</font>생년월일</html>",JLabel.RIGHT);
     	bLa.setBounds(150, 220, 90, 30);
     	add(bLa);
     	
@@ -81,7 +81,7 @@ public class JoinPanel extends JFrame{
     	emailtf.setBounds(265, 255, 450, 30);
     	add(emailtf);
     	////////////////////////////////////////////////////////////
-    	pLa=new JLabel("우편번호",JLabel.RIGHT);
+    	pLa=new JLabel("<html><font color=red>※</font>우편번호</html>",JLabel.RIGHT);
     	pLa.setBounds(150, 290, 90, 30);
     	add(pLa);
     	
@@ -96,7 +96,7 @@ public class JoinPanel extends JFrame{
     	b2.setBounds(470, 290, 150, 30);
     	add(b2);
     	////////////////////////////////////////////////////////////
-    	aLa1=new JLabel("주소",JLabel.RIGHT);
+    	aLa1=new JLabel("<html><font color=red>※</font>주소</html>",JLabel.RIGHT);
     	aLa1.setBounds(150, 325, 90, 30);
     	add(aLa1);
     	

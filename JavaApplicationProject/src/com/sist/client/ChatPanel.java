@@ -59,6 +59,7 @@ public class ChatPanel extends JPanel{
     	
     	box2=new JComboBox<String>();
     	box2.setBounds(495,420, 100, 30);
+    	box2.addItem("all");
     	add(box2);
     	
     	b1=new JButton("1:1상담");
@@ -94,6 +95,9 @@ public class ChatPanel extends JPanel{
         
  	   Style red=pane.addStyle("red", null);
  	   StyleConstants.setForeground(red, Color.red);
+ 	   
+ 	   Style gray=pane.addStyle("gray", null);
+	   StyleConstants.setForeground(gray, Color.gray);
  	   
     }
     
