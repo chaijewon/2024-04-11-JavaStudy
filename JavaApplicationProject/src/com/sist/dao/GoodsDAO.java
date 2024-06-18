@@ -276,6 +276,41 @@ public class GoodsDAO {
     	 return vo;
      }
      // 검색 => LIKE 
+     public ArrayList<GoodsVO> goodsFindData(String name)
+     {
+    	 ArrayList<GoodsVO> list=new ArrayList<GoodsVO>();
+    	 try
+    	 {
+    		 getConnection();
+    		 String sql="SELECT no,goods_name,goods_poster,goods_price "
+    				   +"FROM goods_all "
+    				   +"WHERE goods_name LIKE '%'||?||'%' "
+    				   +"ORDER BY no ASC";
+    		 ps=conn.prepareStatement(sql);
+    		 ps.setString(1, name);
+    		 
+    		 ResultSet rs=ps.executeQuery();
+    		 while(rs.next())
+    		 {
+    			 GoodsVO vo=new GoodsVO();
+    			 vo.setNo(rs.getInt(1));
+    			 vo.setGoods_name(rs.getString(2));
+    			 vo.setGoods_poster(rs.getString(3));
+    			 vo.setGoods_price(rs.getString(4));
+    			 
+    			 list.add(vo);
+    		 }
+    		 rs.close();
+    	 }catch(Exception ex)
+    	 {
+    		 ex.printStackTrace();
+    	 }
+    	 finally
+    	 {
+    		 disConnection();
+    	 }
+    	 return list;
+     }
      // 구매 => INSERT , UPDATE , DELETE 
      
 }

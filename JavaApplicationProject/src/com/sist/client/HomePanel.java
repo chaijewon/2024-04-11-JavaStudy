@@ -1,6 +1,8 @@
 package com.sist.client;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 import com.sist.dao.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -122,12 +124,24 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<imgs.length;i++)
+		{
+			if(e.getSource()==imgs[i])
+			{
+				imgs[i].setBorder(new LineBorder(Color.red,3));
+			}
+		}
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		for(int i=0;i<imgs.length;i++)
+		{
+			if(e.getSource()==imgs[i])
+			{
+				imgs[i].setBorder(null);
+			}
+		}
 	}
     
 }
