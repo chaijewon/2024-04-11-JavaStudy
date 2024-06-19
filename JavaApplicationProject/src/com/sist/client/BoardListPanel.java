@@ -145,6 +145,7 @@ public class BoardListPanel extends JPanel implements ActionListener{
 		else if(e.getSource()==b1)
 		{
 			// 글쓰기로 이동 
+			cp.card.show(cp, "INSERT");
 		}
 	}
 }

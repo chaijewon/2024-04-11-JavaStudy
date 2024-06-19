@@ -12,6 +12,7 @@ public class ControllPanel extends JPanel{
    GoodsDetailPanel dp;
    FindPanel fp;
    BoardListPanel bp;
+   BoardInsertPanel bip;
    ChatPanel chatP=new ChatPanel();
    public ControllPanel()
    {
@@ -21,11 +22,13 @@ public class ControllPanel extends JPanel{
 	   dp=new GoodsDetailPanel(this);
 	   fp=new FindPanel(this);
 	   bp=new BoardListPanel(this);
+	   bip=new BoardInsertPanel(this);
 	   add("HP",hp);
 	   add("CHAT",chatP);
 	   add("DP",dp);
 	   add("FP",fp);
 	   add("LIST",bp);
+	   add("INSERT",bip);
 	   
 	  
    }
