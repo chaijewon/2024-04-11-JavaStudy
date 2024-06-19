@@ -3,11 +3,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import com.sist.dao.*;
-public class BoardListPanel extends JPanel implements ActionListener{
+/*
+ *   1. JButton , JMenu , JTextField => ActionListener
+ *   2. JTable , JLabel => MouseListener 
+ *   3. JComboBox => ItemListener
+ */
+public class BoardListPanel extends JPanel implements ActionListener,MouseListener{
     JLabel titleLa,pageLa;
     JButton b1,b2,b3;
     JTable table;
@@ -95,6 +102,8 @@ public class BoardListPanel extends JPanel implements ActionListener{
     	b1.addActionListener(this);
     	b2.addActionListener(this);
     	b3.addActionListener(this);
+    	
+    	table.addMouseListener(this);
     }
     public void print()
     {
@@ -145,8 +154,48 @@ public class BoardListPanel extends JPanel implements ActionListener{
 		else if(e.getSource()==b1)
 		{
 			// 글쓰기로 이동 
+			cp.bip.nameTf.setText("");
+			cp.bip.subTf.setText("");
+			cp.bip.ta.setText("");
+			cp.bip.pwdPf.setText("");
 			cp.card.show(cp, "INSERT");
+			cp.bip.nameTf.requestFocus();
 		}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==table)
+		{
+			if(e.getClickCount()==2)
+			{
+				int row=table.getSelectedRow();
+				String no=model.getValueAt(row, 0).toString();
+				// 데이터를 출력 
+				// 이동 
+				cp.card.show(cp, "DETAIL");
+			}
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

@@ -259,7 +259,7 @@ public class BoardDAO {
 		   // 1. 연결 
 		   getConnection();
 		   // 2. SQL문장 
-		   String sql="INSERT INTO board(name,subject,content,pwd) "
+		   String sql="INSERT INTO board(no,name,subject,content,pwd) "
 				     +"VALUES(board_no_seq.nextval,?,?,?,?)";
 		   // 3. 전송 
 		   ps=conn.prepareStatement(sql);
@@ -285,6 +285,46 @@ public class BoardDAO {
 	   }
    }
    // 3. 상세보기 => WHERE => 조회수 증가 / 데이터 읽기 
+   public BoardVO boardDetailData(int no)
+   {
+	   // 한개의 게시물에 대한 구분자 => no
+	   BoardVO vo=new BoardVO();
+	   try
+	   {
+		   getConnection();
+		   String sql="UPDATE board SET "
+				     +"hit=hit+1 "
+				     +"WHERE no=?"; // 조회수 증가 
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ps.executeUpdate();
+		   
+		   // 데이터 읽기 
+		   sql="SELECT no,name,subject,content,regdate,hit "
+			  +"FROM board "
+			  +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setSubject(rs.getString(3));
+		   vo.setContent(rs.getString(4));
+		   vo.setRegdate(rs.getDate(5));
+		   vo.setHit(rs.getInt(6));
+		   rs.close();
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
    // 4. 수정 => 비밀번호 체크 => 비밀번호 체크 / 실제 수정  => 묻고답하기 : SQL(5)
    // 5. 삭제 => 비밀번호 체크 => 비밀번호 체크 / 실제 삭제  => 묻고답하기 : SQL(7)
    // 기능 수행을 위해서는  SQL문장이 1개가 아닐 수 있다 => 여러개의 SQL문장을 사용할 수 있다 
