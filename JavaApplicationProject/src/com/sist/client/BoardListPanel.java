@@ -172,6 +172,7 @@ public class BoardListPanel extends JPanel implements ActionListener,MouseListen
 				int row=table.getSelectedRow();
 				String no=model.getValueAt(row, 0).toString();
 				// 데이터를 출력 
+				cp.bdp.print(Integer.parseInt(no));
 				// 이동 
 				cp.card.show(cp, "DETAIL");
 			}
