@@ -10,7 +10,21 @@ public class LoginPanel extends JFrame{
     
     public LoginPanel()
     {
+    
+    	
     	back=Toolkit.getDefaultToolkit().getImage("c:\\project_image\\back.jpg");
+        
+    	setContentPane(new JPanel() {
+
+			@Override
+			protected void paintComponent(Graphics g) {
+				// TODO Auto-generated method stub
+				//super.paintComponent(g);
+				g.drawImage(back, 0,0,getWidth(),getHeight(),null);
+				
+			}
+    		
+    	});
     	
     	idLa=new JLabel("아이디",JLabel.RIGHT);
     	pwdLa=new JLabel("비밀번호",JLabel.RIGHT);

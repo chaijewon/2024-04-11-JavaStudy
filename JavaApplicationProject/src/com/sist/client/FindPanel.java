@@ -75,7 +75,13 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
     	tf.addActionListener(this);
     	b.addActionListener(this);
     	table.addMouseListener(this);
+    	
+    	//setSize(960, 680);
+    	//setVisible(true);
     }
+    public static void main(String[] args) {
+		new FindPanel(null);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
