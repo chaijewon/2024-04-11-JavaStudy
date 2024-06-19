@@ -102,6 +102,7 @@ public class BoardDetailPanel extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==b3)
 		{
+			cp.bp.print();
 			cp.card.show(cp,"LIST");// <input type=button value="목록" onclick="javascript:history.back()">
 		}
 		else if(e.getSource()==b2)
@@ -112,7 +113,12 @@ public class BoardDetailPanel extends JPanel implements ActionListener{
 		}
 		else if(e.getSource()==b1)
 		{
-			
+			BoardVO vo=dao.boardUpdateData(Integer.parseInt(no.getText()));
+			cp.bup.no=vo.getNo();
+			cp.bup.nameTf.setText(vo.getName());
+			cp.bup.subTf.setText(vo.getSubject());
+			cp.bup.ta.setText(vo.getContent());
+			cp.card.show(cp, "UPDATE");
 		}
 	}
 }

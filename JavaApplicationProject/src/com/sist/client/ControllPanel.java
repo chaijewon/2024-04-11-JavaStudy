@@ -15,6 +15,7 @@ public class ControllPanel extends JPanel{
    BoardInsertPanel bip;
    BoardDetailPanel bdp;
    BoardDeletePanel bdelP;
+   BoardUpdatePanel bup;
    ChatPanel chatP=new ChatPanel();
    // 웹에서 => 화면 변경 => Controller 
    /*
@@ -37,6 +38,7 @@ public class ControllPanel extends JPanel{
 	   bip=new BoardInsertPanel(this);
 	   bdp=new BoardDetailPanel(this);
 	   bdelP=new BoardDeletePanel(this);
+	   bup=new BoardUpdatePanel(this);
 	   add("HP",hp);
 	   add("CHAT",chatP);
 	   add("DP",dp);
@@ -45,6 +47,7 @@ public class ControllPanel extends JPanel{
 	   add("INSERT",bip);
 	   add("DETAIL",bdp);
 	   add("DELETE",bdelP);
+	   add("UPDATE",bup);
 	  
    }
 }

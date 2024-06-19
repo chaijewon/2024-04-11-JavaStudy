@@ -46,6 +46,30 @@ public class BoardDeletePanel extends JPanel implements ActionListener{
 		{
 			cp.card.show(cp, "DETAIL");
 		}
+		else if(e.getSource()==b1)
+		{
+			// 비밀번호 
+			String pwd=String.valueOf(pf.getPassword());
+			if(pwd.length()<1)
+			{
+				pf.requestFocus();
+				return;
+			}
+			boolean bCheck=dao.boardDelete(no, pwd);
+			if(bCheck==true)
+			{
+				JOptionPane.showMessageDialog(this, "게시물이 삭제되었습니다");
+				// 이동 
+				cp.bp.print();
+				cp.card.show(cp,"LIST");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(this, "비밀번호가 틀립니다\n다시 입력하세요");
+				pf.setText("");
+				pf.requestFocus();
+			}
+		}
 	}
    
 }
