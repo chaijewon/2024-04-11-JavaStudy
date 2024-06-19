@@ -326,7 +326,47 @@ public class BoardDAO {
 	   return vo;
    }
    // 4. 수정 => 비밀번호 체크 => 비밀번호 체크 / 실제 수정  => 묻고답하기 : SQL(5)
+   
    // 5. 삭제 => 비밀번호 체크 => 비밀번호 체크 / 실제 삭제  => 묻고답하기 : SQL(7)
+   public boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT pwd FROM board "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   
+		   if(db_pwd.equals(pwd))
+		   {
+			   bCheck=true;
+			   // 실제 삭제
+			   sql="DELETE FROM board "
+				  +"WHERE no=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setInt(1, no);
+			   ps.executeUpdate();
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return bCheck;
+   }
    // 기능 수행을 위해서는  SQL문장이 1개가 아닐 수 있다 => 여러개의 SQL문장을 사용할 수 있다 
 }
 

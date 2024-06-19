@@ -3,15 +3,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import com.sist.dao.*;
-public class BoardDeletePanel extends JPanel{
+public class BoardDeletePanel extends JPanel implements ActionListener{
    JLabel titleLa,pwdLa;
    JPasswordField pf;
    JButton b1,b2;
    ControllPanel cp;
    BoardDAO dao;
-   
+   int no=0;
    public BoardDeletePanel(ControllPanel cp)
    {
+	   this.cp=cp;
+	   dao=BoardDAO.newInstance();
 	   titleLa=new JLabel("삭제하기",JLabel.CENTER);// <table>
    	   titleLa.setFont(new Font("맑은 고딕",Font.BOLD,30)); //<h3></h3>
    	   setLayout(null);
@@ -34,6 +36,16 @@ public class BoardDeletePanel extends JPanel{
    	   p.setBounds(300, 120, 205, 35);
    	   add(p);
    	   
+   	   b1.addActionListener(this);
+   	   b2.addActionListener(this);
    }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==b2)
+		{
+			cp.card.show(cp, "DETAIL");
+		}
+	}
    
 }

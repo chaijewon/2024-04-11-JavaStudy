@@ -107,6 +107,7 @@ public class BoardDetailPanel extends JPanel implements ActionListener{
 		else if(e.getSource()==b2)
 		{
 			cp.bdelP.pf.setText("");
+			cp.bdelP.no=Integer.parseInt(no.getText());// <input type=hidden value="10">
 			cp.card.show(cp, "DELETE");
 		}
 		else if(e.getSource()==b1)
