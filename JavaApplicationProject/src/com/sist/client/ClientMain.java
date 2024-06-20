@@ -536,6 +536,13 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					  JOptionPane.showMessageDialog(this, adminId+"님이 거절하셨습니다");
 				  }
 				  break;
+				  case Function.ONEYES:
+				  {
+					  String id=st.nextToken();
+					  cp.chatP.youTf.setText(id);
+					  cp.chatP.pan.setVisible(true);
+				  }
+				  break;
 				  case Function.MYEXIT:
 				  {
 					  System.exit(0);

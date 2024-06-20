@@ -19,6 +19,7 @@ public class ChatPanel extends JPanel{
     JTextField youTf,sendTf;
     JTextArea ta;
     JButton ob;
+    JPanel pan=new JPanel();
     public ChatPanel()
     {
     	setLayout(null);
@@ -87,7 +88,7 @@ public class ChatPanel extends JPanel{
     	
     	sendTf=new JTextField(30);
     	
-    	JPanel pan=new JPanel();
+    	
     	pan.setLayout(new BorderLayout());
     	
     	JPanel p=new JPanel();
