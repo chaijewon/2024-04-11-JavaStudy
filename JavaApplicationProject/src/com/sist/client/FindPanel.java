@@ -135,7 +135,7 @@ public class FindPanel extends JPanel implements ActionListener,MouseListener{
 			{
 				int row=table.getSelectedRow();
 				String no=model.getValueAt(row, 0).toString();
-				cp.dp.print(Integer.parseInt(no));
+				//cp.dp.print(Integer.parseInt(no));
 				cp.card.show(cp, "DP");
 			}
 		}

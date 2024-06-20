@@ -20,7 +20,7 @@ public class LoginPanel extends JFrame{
 			protected void paintComponent(Graphics g) {
 				// TODO Auto-generated method stub
 				//super.paintComponent(g);
-//				g.drawImage(back, 0,0,getWidth(),getHeight(),this);
+				g.drawImage(back, 0,0,getWidth(),getHeight(),this);
 				
 			}
     		

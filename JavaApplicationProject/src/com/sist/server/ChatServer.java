@@ -117,7 +117,7 @@ public class ChatServer implements Runnable{
 						   waitVc.add(this);
 						   
 						   // Login=>Home으로 변경 (창) 
-						   messageTo(Function.MYLOG+"|"+id+"|"+name);
+						   messageTo(Function.MYLOG+"|"+id+"|"+name+"|"+admin);
 						   // 접속자 정보를 전송 
 						   for(Client client:waitVc)
 						   {
@@ -156,12 +156,12 @@ public class ChatServer implements Runnable{
 						    	in.close();
 						    	out.close();
 						    	
-						    	break;
 						     }
 						    // => 나가라는 메세지 전송 
 						    // => in/out종료
 						   }
 					   }
+					   break;
 					}
 				}
 			}catch(Exception ex) {}

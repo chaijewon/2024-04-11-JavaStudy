@@ -25,6 +25,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     GoodsDAO dao;
     // 초기화 
     ControllPanel cp;
+    String myId;
     public HomePanel(ControllPanel cp)
     {
     	this.cp=cp;
@@ -45,6 +46,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
     }
     public void print()
     {
+    	
     	totalpage=dao.goodsTotalPage();
     	ArrayList<GoodsVO> list=dao.goodsListData(curpage);
     	for(int i=0;i<list.size();i++)
@@ -105,7 +107,7 @@ public class HomePanel extends JPanel implements ActionListener,MouseListener{
 				{
 					String no=imgs[i].getToolTipText();
 					no=no.substring(no.lastIndexOf("^")+1);
-					cp.dp.print(Integer.parseInt(no));
+					cp.dp.print(Integer.parseInt(no),myId);
 					cp.card.show(cp, "DP");
 				}
 			}
