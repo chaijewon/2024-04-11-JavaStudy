@@ -2,7 +2,7 @@ package com.sist.client;
 import java.awt.*;
 import javax.swing.*;
 public class MenuPanel extends JPanel{
-    JButton homeBtn,findBtn,boardBtn,chatBtn,newsBtn,myBtn,exitBtn;
+    JButton homeBtn,findBtn,boardBtn,chatBtn,newsBtn,myBtn,exitBtn,dayBtn;
     public MenuPanel()
     {
     	setLayout(new GridLayout(1,6,5,5));
@@ -14,12 +14,15 @@ public class MenuPanel extends JPanel{
     	newsBtn=new JButton("뉴스 검색"); // 1명
     	exitBtn=new JButton("나가기");
     	myBtn=new JButton("마이페이지");
+    	dayBtn=new JButton("일정관리");
     	add(homeBtn);
     	add(findBtn);
     	add(boardBtn);
     	add(chatBtn);
     	add(newsBtn);
     	add(myBtn);
+    	add(dayBtn);
     	add(exitBtn);
+    	
     }
 }

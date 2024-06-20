@@ -81,6 +81,8 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	mp.findBtn.addActionListener(this);
     	mp.boardBtn.addActionListener(this);
     	mp.myBtn.addActionListener(this);
+    	mp.newsBtn.addActionListener(this);
+    	mp.dayBtn.addActionListener(this);
     	
     	cp.chatP.tf.addActionListener(this);
     	cp.chatP.b1.addActionListener(this);
@@ -103,6 +105,14 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 		{
 			dispose();// window메모리 해제 
 			System.exit(0);// 프로그램 종료
+		}
+		else if(e.getSource()==mp.dayBtn)
+		{
+			cp.card.show(cp, "DIARY");
+		}
+		else if(e.getSource()==mp.newsBtn)
+		{
+			cp.card.show(cp, "NEWS");
 		}
 		// 마이 페이지
 		else if(e.getSource()==mp.myBtn)
