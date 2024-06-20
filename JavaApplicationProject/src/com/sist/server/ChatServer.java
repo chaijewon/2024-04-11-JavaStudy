@@ -105,7 +105,7 @@ public class ChatServer implements Runnable{
 						   name=vo.getName();
 						   sex=vo.getSex();
 						   admin=vo.getAdmin();
-						   System.out.println("name="+name);
+						   //System.out.println("name="+name);
 						   // 1. 접속된 모든 회원에게 정보 전송 
 						   messageAll(Function.LOGIN+"|"+id+"|"+name+"|"
 								    +sex+"|"+admin);
@@ -135,6 +135,38 @@ public class ChatServer implements Runnable{
 					   }
 					   break;
 					   case Function.INFO:
+					   {
+						   
+					   }
+					   break;
+					   // 상담 
+					   case Function.ONEINIT:
+					   {
+						   String adminId=st.nextToken();
+						   String userId=st.nextToken();
+						   for(Client client:waitVc)
+						   {
+							   if(adminId.equals(client.id))
+							   {
+								   client.messageTo(Function.ONEINIT+"|"+userId);
+							   }
+						   }
+					   }
+					   break;
+					   // this => 
+					   case Function.ONENO:
+					   {
+						   String userId=st.nextToken();
+						   for(Client client:waitVc)
+						   {
+							   if(userId.equals(client.id))
+							   {
+								   client.messageTo(Function.ONENO+"|"+id);
+							   }
+						   }
+					   }
+					   break;
+					   case Function.ONEYES:
 					   {
 						   
 					   }

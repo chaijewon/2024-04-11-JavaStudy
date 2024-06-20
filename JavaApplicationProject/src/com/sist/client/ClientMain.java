@@ -40,8 +40,7 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
      *      --- PORT/IP을 직접 결정 => 고정이여야 한다 
      */
     // 개인마다 필요한 변수 
-    String myId,youId;
-    int oto=0;
+    String myId;
     public ClientMain()
     {
     	cp=new ControllPanel(this);
@@ -142,9 +141,8 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 		}
 		else if(e.getSource()==cp.chatP.b1)
 		{
-			oto=1;
 			String you=cp.chatP.box2.getSelectedItem().toString();
-			if(!you.equals("all"))
+			if(!you.equals("상담자"))
 			{
 			  try
 			  {
@@ -516,11 +514,34 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					  cp.chatP.append(message, color);
 				  }
 				  break;
+				  // 상담 
+				  case Function.ONEINIT:
+				  {
+					  String userId=st.nextToken();
+					  int sel=JOptionPane.showConfirmDialog(this,userId+"님이 상담을 요청하셨습니다",
+							  "상담요청",JOptionPane.YES_NO_OPTION);
+					  if(sel==JOptionPane.YES_OPTION)
+					  {
+						  out.write((Function.ONEYES+"|"+userId+"\n").getBytes());
+					  }
+					  else
+					  {
+						  out.write((Function.ONENO+"|"+userId+"\n").getBytes());
+					  }
+				  }
+				  break;
+				  case Function.ONENO:
+				  {
+					  String adminId=st.nextToken();
+					  JOptionPane.showMessageDialog(this, adminId+"님이 거절하셨습니다");
+				  }
+				  break;
 				  case Function.MYEXIT:
 				  {
 					  System.exit(0);
 				  }
 				  break;
+				  
 				  case Function.EXIT:
 				  {
 					  String yid=st.nextToken();
