@@ -179,6 +179,21 @@ public class ChatServer implements Runnable{
 						   }
 					   }
 					   break;
+					   case Function.ONETOONE:
+					   {
+						   String userId=st.nextToken();
+						   String message=st.nextToken();
+						   for(Client client:waitVc)
+						   {
+							   if(userId.equals(client.id))
+							   {
+								   client.messageTo(Function.ONETOONE+"|["+name+"]"+message);// 상담 받는 사람 
+								   messageTo(Function.ONETOONE+"|["+name+"]"+message);// 상담자 
+							   }
+						   }
+						   
+					   }
+					   break;
 					   case Function.EXIT:
 					   {
 						   messageAll(Function.EXIT+"|"+id);

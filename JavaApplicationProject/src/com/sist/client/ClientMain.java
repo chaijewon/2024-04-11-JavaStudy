@@ -559,6 +559,11 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 					  cp.chatP.pan.setVisible(true);
 				  }
 				  break;
+				  case Function.ONETOONE:
+				  {
+					 cp.chatP.ta.append(st.nextToken()+"\n"); 
+				  }
+				  break;
 				  case Function.MYEXIT:
 				  {
 					  System.exit(0);
