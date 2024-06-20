@@ -84,6 +84,8 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
     	
     	cp.chatP.tf.addActionListener(this);
     	cp.chatP.b1.addActionListener(this);
+    	cp.chatP.sendTf.addActionListener(this);
+    	cp.chatP.ob.addActionListener(this);
     	
     }
 	public static void main(String[] args) {
@@ -153,6 +155,20 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			{
 				JOptionPane.showMessageDialog(this, "상담자를 선택하세요!!");
 			}
+		}
+		else if(e.getSource()==cp.chatP.sendTf)
+		{
+			String youId=cp.chatP.youTf.getText();
+			String message=cp.chatP.sendTf.getText();
+			if(message.length()<1)
+				return;
+			
+			try
+			{
+				out.write((Function.ONETOONE+"|"+youId+"|"+message+"\n").getBytes());
+			}catch(Exception ex) {}
+			cp.chatP.sendTf.setText("");
+			cp.chatP.sendTf.requestFocus();
 		}
 		else if(e.getSource()==mp.chatBtn)
 		{
