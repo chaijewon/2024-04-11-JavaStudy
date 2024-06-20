@@ -106,6 +106,14 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 			dispose();// window메모리 해제 
 			System.exit(0);// 프로그램 종료
 		}
+		else if(e.getSource()==cp.chatP.ob)
+		{
+			try
+			{
+				String youId=cp.chatP.youTf.getText();
+				out.write((Function.ONEEXIT+"|"+youId+"\n").getBytes());
+			}catch(Exception ex) {}
+		}
 		else if(e.getSource()==mp.dayBtn)
 		{
 			cp.card.show(cp, "DIARY");
@@ -572,6 +580,12 @@ public class ClientMain extends JFrame implements ActionListener,MouseListener,R
 				  case Function.ONETOONE:
 				  {
 					 cp.chatP.ta.append(st.nextToken()+"\n"); 
+				  }
+				  break;
+				  case Function.ONEEXIT:
+				  {
+					  JOptionPane.showMessageDialog(this, "상담을 종료합니다");
+					  cp.chatP.pan.setVisible(false);
 				  }
 				  break;
 				  case Function.MYEXIT:
