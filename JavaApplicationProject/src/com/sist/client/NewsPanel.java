@@ -8,13 +8,14 @@ import com.sist.manager.NewsVO;
 import java.awt.event.*;
 import java.util.List;
 import java.util.*;
-public class NewsPanel extends JPanel implements ActionListener{
+public class NewsPanel extends JPanel implements ActionListener,MouseListener{
    NewsCard[] cards=new NewsCard[10];
    JTextField tf;
    JButton b;
    JPanel pan;
    JScrollPane pane;
    ControllPanel cp;
+   List<NewsVO> list=new ArrayList<NewsVO>();
    public NewsPanel(ControllPanel cp)
    {
 	   // 초기화 
@@ -24,6 +25,7 @@ public class NewsPanel extends JPanel implements ActionListener{
 	   for(int i=0;i<cards.length;i++)
 	   {
 		   cards[i]=new NewsCard();
+		   cards[i].addMouseListener(this);
 	   }
 	   pan=new JPanel();
 	   pan.setLayout(new GridLayout(10,1,5,5));
@@ -52,7 +54,7 @@ public class NewsPanel extends JPanel implements ActionListener{
    }
     public void newsPrint(String fd)
     {
-    	List<NewsVO> list=NaverNewsManager.newsSearchData(fd);
+    	list=NaverNewsManager.newsSearchData(fd);
 		pan.setLayout(new GridLayout(10,1,5,5));
 		int i=0;
 		for(NewsVO vo:list)
@@ -79,5 +81,39 @@ public class NewsPanel extends JPanel implements ActionListener{
 			}
 			newsPrint(fd);
 		}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<list.size();i++)
+		{
+			if(e.getSource()==cards[i])
+			{
+				try
+				{
+					Runtime.getRuntime().exec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe "+list.get(i).getLink() );
+				}catch(Exception ex) {}
+			}
+		}
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
